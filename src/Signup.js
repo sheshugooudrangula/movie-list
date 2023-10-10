@@ -11,6 +11,7 @@ function Signup() {
     profession: '',
   });
   const [errors, setErrors] = useState({});
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,29 +26,29 @@ function Signup() {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = alert("Name is required");
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = alert("Enter password ");
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = alert("Password must have at least 6 characters ");
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = alert("Enter email ");
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email address';
+      newErrors.email = alert('Invalid email address');
     }
 
     if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Phone Number is required';
+      newErrors.phoneNumber = alert('Phone number is required');
     } else if (!/^\d{10}$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Invalid phone number format';
+      newErrors.phoneNumber =  alert('Invalid phone number format');
     }
 
     if (!formData.profession) {
-      newErrors.profession = 'Profession is required';
+      newErrors.profession = alert('Profession is required');
     }
 
     if (Object.keys(newErrors).length === 0) {
@@ -63,69 +64,63 @@ function Signup() {
   
 
   return (
-    <div className='card'>
+    <div className='outer-box'>
+    <div className='inner-box'>
       <h2>User Signup</h2>
-      <form onSubmit={handleSubmit}>
-      <label className='row'>Name:
+      <form onSubmit={handleSubmit} className='signup-body'>
+      <label >Name:
       <input
             type="text"
-             className='name'
              placeholder='enter name'
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
+           
           />            </label>
            
             
-            <label className='row'>Password:
+            <label >Password:
             <input
             type="password"
             placeholder='enter password'
-            className='password'
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            required
+         
           />            </label>
            
 
-            <label className='row'>Email:
+            <label >Email:
             <input
             type="email"
             placeholder='enter email'
-            className='email'
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            required
+
+            
           />            </label>
             
-            <label className='rows'>Phone Number:   
+            <label>Phone Number:   
             <input
             type="tel"
-            className='phoneNumber'
             placeholder='enter number'
             id="phoneNumber"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
-            required
-          />            </label>
-            <br></br>
-            <br></br>
 
-            <label className='rows'>Profession:</label>
+          />            </label>
+            
+            <label className='for-p'>Profession:</label>
           <select
             id="profession"
             name="profession"
-            className='profession'
             value={formData.profession}
             onChange={handleChange}
-            required
           >
             <option value="">Select Profession</option>
             <option value="student">Student</option>
@@ -133,13 +128,15 @@ function Signup() {
             <option value="engineer">Engineer</option>
             
           </select>
-          
+          <br></br>
             <br></br>
-        <button type="submit">Sign Up</button>
+            <input type='submit' id='submit' value="Singup"/>
         {errors.profession && <span className="error">{errors.profession}</span>}
-
-        <h3 onClick={() => navigate('/login')}>Already have an account? Log In</h3>
+        <div className='signup-footer'>
+        <h3 onClick={() => navigate('/login')}>Already have an account? <span className='of'>Log In</span> </h3>
+        </div>
       </form>
+    </div>
     </div>
   );
 }

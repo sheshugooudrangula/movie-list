@@ -18,16 +18,16 @@ function Login() {
     const newErrors = {};
 
     if (!loginData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name =  alert("Enter the name which you are entered in signup page");
     }
 
     if (!loginData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = alert("Enter the password");
     }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return; // Prevent login if there are validation errors
+      return; 
     }
 
     if (
@@ -41,14 +41,14 @@ function Login() {
     }
   };
   return (
-    <div className='card'>
+    <div className='outer-box'>
+    <div className='inner-box'>
       <h2>User Login</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className='signup-body'>
       <div>
-          <label className='row'>Name:   </label>
+          <label>Name:   </label>
           <input
             type="text"
-            className='name'
             id="name"
             name="name"
             placeholder='enter name'
@@ -58,23 +58,24 @@ function Login() {
           />
         </div>
         <div>
-          <label className='row'>Password:</label>
+          <label >Password:</label>
           <input
             type="password"
-            className='password'
             id="password"
             name="password"
-            placeholder='enter password'
+            placeholder='enter password '
             value={loginData.password}
             onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
             required
           />
         </div>
-        <button type="submit">Log In</button>
+        <input type='submit' id='submit' value="Login"/>
         {errors.password && <span className="error">{errors.password}</span>}
-
-        <h3 onClick={() => navigate('/signup')}>Don't have an account? Sign Up</h3>
+<div className='signup-footer'>
+        <h3  onClick={() => navigate('/signup')}>Don't have an account? <span className='of'>Sign Up</span></h3>
+        </div>
       </form>
+    </div>
     </div>
   );
 }

@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope,faArrowUp } from '@fortawesome/free-solid-svg-icons'
+
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -39,6 +42,22 @@ function Dashboard() {
         });
     },[]);
 
+    const handleUpvoted = (movieIndex)=>{
+
+      const updateMovieData = [...movieData]
+      updateMovieData[movieIndex].totalVoted++;
+      setMovieData(updateMovieData);
+
+      fetch('https://hoblist.com/api/movieList',{
+        method: 'POST' ,
+        body: JSON.stringify({movieId:updateMovieData[movieIndex].id}),
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+      });
+    };
+   
+    
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -48,22 +67,29 @@ function Dashboard() {
   }
 
   return (
-    <div className="dashboard-container">
-    <h2 className="dashboard-heading">Movie Dashboard</h2>
-    <ul className="dashboard-list">
+    <div className='outer-dash-box'>
+      <div className='inner-dash-box'>
+  
+    <h2>Movie Dashboard</h2>
+    <ul>
       {movieData.map((movie, index) => (
         <div>
             <div className='parent'>
+            <div className='icon'>
+            <FontAwesomeIcon icon={faArrowUp} className='up'onClick={()=>handleUpvoted(index)} /> 
+            <span className='vote'>{movie.totalVoted}</span>
+            <FontAwesomeIcon icon={faArrowUp} rotation={180} className='down'  />         </div>
             <img src={movie.poster} className='card-image' alt={movie.title} />
                 <div className='child'>
-                <li key={index} className="dashboard-list-item">
+                <li key={index} >
             <h2 className='card-title'>{movie.title}</h2>
-          <p className='card-Genre'>Genre:{movie.genre}</p>
-          <p className='card-director'>Director:{movie.director}</p>
-          <p className='card-star'>starring:{movie.stars}</p>
+          <p className='card-item'>Genre:{movie.genre}</p>
+          <p className='card-item'>Director:{movie.director}</p>
+          <p className='card-item'>starring:{movie.stars}</p>
           <p className='card-time'>{movie.runTime}Mins | {movie.language} | {movie.releasedDate}</p>
           <p className='card-view'>{movie.pageViews}views | {movie.language} | voted by {movie.totalVoted} people</p>
-          <button className='bt' type="submit">watch trailer</button>
+          <button type='submit'> Watch tariler</button>
+         
         </li>
                 </div>
             </div>
@@ -72,6 +98,8 @@ function Dashboard() {
     </ul>
     <button className="dashboard-button">Load More</button>
   </div>
+  </div>
+  
 );
 }
 

@@ -98,51 +98,13 @@
     transition: color 0.3s;
   }
   }
-  /* Navbar.css (or add this to your existing CSS file) */
-/* .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-  }
-  
-  
-  
-  .navbar a:hover {
-    color: #007bff;
-  }
-  
-  .navbar button {
-    background-color: transparent;
+  .navbar button{
+    background-color: #3498db;
     border: none;
-    cursor: pointer;
-    color: #fff;
-    font-weight: bold;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 90px;
+  border-radius: 10px;
   }
-  
-  .company-info {
-    background-color: #fff;
-    color: #333;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 50px;
-    right: 20px;
-    z-index: 1;
-    display: none; /* Hide initially */
-  /* }
-  
-  .company-info h2 {
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .company-info p {
-    margin: 0;
-  }
-  
-  .company-info.active {
-    display: block; /* Show when active */
-  /* }
-   */ 
+ 
